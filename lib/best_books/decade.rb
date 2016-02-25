@@ -13,15 +13,17 @@ end
 def self.scraper
 		decades = Nokogiri::HTML(open("https://www.goodreads.com/list/show/7"))
 		decades.css("div.mediumText a").each do |scrape|
-			#if scrape.text.include?("Century")
+			if scrape.text.include?("Century")
 				decade = self.new
 				decade.name = scrape.text.strip.gsub("Best Books of the", "")
 				decade.url = scrape.attr("href")
 				decade
 				@@all << decade
+			else
+				scrape
 			end
-			#end
-		return @@all
+		end
+	return @@all
 end
 
 def self.all
@@ -29,8 +31,8 @@ def self.all
 end
 
 def self.print
-	@@all.each_with_index do |key, i|
-		puts "#{i}. #{key.name}"
+	BestBooks::Decade.scraper.each_with_index do |key, i|
+		puts "#{i+1}. #{key.name}"
 		end
 end
 

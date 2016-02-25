@@ -9,6 +9,7 @@ class BestBooks::CLI
 
 	def list_decades
 		@decade = BestBooks::Decade.print
+		@decade
 	end
 
 	def menu
