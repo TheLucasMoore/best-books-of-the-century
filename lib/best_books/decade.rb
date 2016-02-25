@@ -29,13 +29,25 @@ def self.all
 end
 
 def self.print
-	printme = []
-	@@all.each do |name, url|
-		if name.@name.include?("century")
-			printme << @name
+	@@all.each_with_index do |key, i|
+		puts "#{i}. #{key.name}"
 		end
-		printme
-	end
 end
 
 end
+
+#[#<BestBooks::Decade:0x007fa56bb3f610
+#  @name=" 21st Century",
+#  @url="https://www.goodreads.com/list/show/7">,
+# #<BestBooks::Decade:0x007fa56bb3f3e0
+#  @name=" 20th Century",
+#  @url="https://www.goodreads.com/list/show/6">,
+# #<BestBooks::Decade:0x007fa56bb3f1d8
+#  @name=" 19th Century",
+#  @url="https://www.goodreads.com/list/show/16">,
+# #<BestBooks::Decade:0x007fa56bb3eff8
+#  @name=" 18th Century",
+# @url="https://www.goodreads.com/list/show/30">,
+# #<BestBooks::Decade:0x007fa56bb3ee18
+#  @name=" 17th Century",
+#  @url="https://www.goodreads.com/list/show/53">,
