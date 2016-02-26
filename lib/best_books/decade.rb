@@ -23,7 +23,7 @@ class BestBooks::Decade
 					scrape
 				end
 			end
-		return @@all
+		@@all
 	end
 
 	def self.print
@@ -37,10 +37,23 @@ class BestBooks::Decade
 		@@all.each do |geturl|
 			bookscraper = BestBooks::Book.scrape(geturl.url)
 			top10 = []
-			top10 << bookscraper
+			top10 = bookscraper
 			geturl.top10 = top10
 		end
 		@@all
 	end
 
+	def self.all
+		@@all
+	end
+
+	def self.top10(input)
+		BestBooks::Decade.books
+		iterate = @@all[input]
+			iterate.top10.each do |book|
+				puts "#{book.ranking}. #{book.title} by #{book.author}"
+		end
+	end
+
 end
+
