@@ -1,6 +1,6 @@
 class BestBooks::Decade
 
-	attr_accessor :name, :url, :top10
+	attr_accessor :name, :url, :top10, :decade
 
 	@@all = []
 
@@ -8,7 +8,6 @@ class BestBooks::Decade
 		@name = name
 		@url = url
 		@top10 = top10
-		@@all
 	end
 
 	def self.scraper
@@ -27,25 +26,21 @@ class BestBooks::Decade
 		return @@all
 	end
 
-	def self.save
-		
-	end
-
 	def self.print
 		BestBooks::Decade.scraper.each_with_index do |key, i|
 			puts "#{i+1}. #{key.name}" if i < 9
 			end
 	end
 
-	def top10
-		#puts "book.rank - book.title by book.author"
-	end
-
 	def self.books
-		@@all.each do |url|
-			self.url
+		#binding.pry
+		@@all.each do |geturl|
+			bookscraper = BestBooks::Book.scrape(geturl.url)
+			top10 = []
+			top10 << bookscraper
+			geturl.top10 = top10
 		end
-		binding.pry
+		@@all
 	end
 
 end
