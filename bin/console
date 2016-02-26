@@ -9,6 +9,13 @@ require "best_books"
 # (If you use this, don't forget to add pry to your Gemfile!)
 # require "pry"
 # Pry.start
+# 
+def reload!
+	load 'best_books.rb'
+	load 'best_books/book.rb'
+	load 'best_books/cli.rb'
+	load 'best_books/decade.rb'
+end
 
 require "irb"
 IRB.start
