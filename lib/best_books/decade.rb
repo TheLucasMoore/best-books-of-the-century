@@ -32,6 +32,15 @@ class BestBooks::Decade
 			end
 	end
 
+	def self.save
+		@@all << self
+	end
+
+	def self.all
+		@@all
+	end
+
+
 	def self.books
 		#binding.pry
 		@@all.each do |geturl|
@@ -43,16 +52,22 @@ class BestBooks::Decade
 		@@all
 	end
 
-	def self.all
-		@@all
-	end
-
 	def self.top10(input)
 		BestBooks::Decade.books
 		iterate = @@all[input]
 			iterate.top10.each do |book|
 				puts "#{book.ranking}. #{book.title} by #{book.author}"
 		end
+	end
+
+	def self.description(input)
+		BestBooks::Decade.books
+		@@all.top10.each do |book|
+			book[input]
+			puts "#{book.ranking}. #{book.title} by #{book.author}"
+			puts "Rated #{book.ratings}"
+			puts "#{book.description}"
+			end
 	end
 
 end
