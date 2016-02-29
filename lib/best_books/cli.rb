@@ -13,13 +13,12 @@ class BestBooks::CLI
 	end
 
 	def topten(input)
+		#This takes over a minute to load and that's gotta change. 
 		BestBooks::Decade.top10(input.to_i)
 	end
 
-	def book_descriptions(input)
-		puts "Type the number of the book to read the description, rating and more information."
-		book = gets.strip.downcase
-		BestBooks::Decade.description(input.to_i)
+	def book_descriptions(input, book_input)
+		BestBooks::Decade.description(input, book_input.to_i)
 	end
 
 	def menu
@@ -29,11 +28,23 @@ class BestBooks::CLI
 		while input != "exit"
 			input = gets.strip.downcase
 			if input.to_i > 0
-				puts "Here are the top 10 books of the"
+				puts "Loading.... Here are the top 10 books of the"
 				puts @decade[input.to_i-1].name
 				topten(input)
-				book_descriptions(input)
-				puts "Enter 'list' to see the decades again."
+
+				book_input = ""
+				while book_input != "exit"
+				puts "Type the number of the book to read the description, rating and more information."
+				book_input = gets.strip.downcase
+				if book_input.to_i > 0
+					book_descriptions(input, book_input)
+					puts "For information on another book, enter its number."
+					puts "To see the top ten books for this decade, type 'top ten'"
+				elsif book_input == "top ten"
+					topten(input)
+				end
+				end
+				
 			elsif input == "list"
 				list_decades
 			else

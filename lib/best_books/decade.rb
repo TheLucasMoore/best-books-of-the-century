@@ -42,7 +42,6 @@ class BestBooks::Decade
 
 
 	def self.books
-		#binding.pry
 		@@all.each do |geturl|
 			bookscraper = BestBooks::Book.scrape(geturl.url)
 			top10 = []
@@ -60,14 +59,18 @@ class BestBooks::Decade
 		end
 	end
 
-	def self.description(input)
-		BestBooks::Decade.books
-		@@all.top10.each do |book|
-			book[input]
-			puts "#{book.ranking}. #{book.title} by #{book.author}"
-			puts "Rated #{book.ratings}"
+	def self.description(input, book_input)
+		#BestBooks::Decade.books
+		iterate = @@all[input.to_i]
+			iterate.top10.each do |book|
+		if book.ranking.to_i == book_input
+			puts "#{book.ranking} #{book.title} by #{book.author}"
+			puts "Rated #{book.rating}"
 			puts "#{book.description}"
+		else
+			puts " "
 			end
+		end
 	end
 
 end
