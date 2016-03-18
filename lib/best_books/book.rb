@@ -2,8 +2,9 @@ class BestBooks::Book
 
 	attr_accessor :ranking, :title, :link, :author, :rating, :description, :decade
 
+	@@all = []
+
 	def initialize
-		@@all
 		@ranking = ranking
 		@title = title
 		@link = link
@@ -11,6 +12,7 @@ class BestBooks::Book
 		@rating = rating
 		@description = description
 		@decade = decade
+		@@all << self
 	end
 
 	def self.scrape(link)
@@ -22,12 +24,12 @@ class BestBooks::Book
 			libro = BestBooks::Book.new
 			libro.ranking = this.css("td.number").text
 			libro.title = this.css("a.bookTitle span").text
-			libro.link = this.css("a.bookTitle").attr("href")
+			libro.link = this.css("a.bookTitle").attr("href").value
 			libro.author = this.css(".authorName span").text
 			libro.rating = this.css(".minirating").text.strip
+				finder = Nokogiri::HTML(open("https://www.goodreads.com" + libro.link))
+			libro.description = finder.css("#description span").text
 			#libro.decade = BestBooks::Decade.name
-				## descrip = Nokogiri::HTML(open("https://www.goodreads.com" + libro.link))
-			## libro.description = descrip.css("div.description span").text
 			libro
 			@top10books.push(libro)
 		else
@@ -41,9 +43,4 @@ class BestBooks::Book
 		@@all
 	end
 
-	def description
-		#@@all.each do |descrip|
-		#	
-		#end
-	end
 end
