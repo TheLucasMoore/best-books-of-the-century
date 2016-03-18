@@ -20,7 +20,7 @@ class BestBooks::CLI
 			input = gets.strip.downcase
 			if input.to_i > 0
 				puts "Here are the top 10 books of the"
-				puts @decade[input.to_i-1].name}
+				puts @decade[input.to_i-1].name
 				BestBooks::Decade.top10(input.to_i)
 			elsif input == "list"
 				list_decades
